@@ -62,4 +62,3 @@ tmp
 dist
 
 config.js
-knexfile.js
