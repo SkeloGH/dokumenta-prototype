@@ -1,0 +1,14 @@
+<div class="container">
+    <form class="edit-form form-signin" method="post" action="<%= routeMappings.Users.update.url(currentUser.id) %>">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="_method" value="PUT">
+
+        <h2 class="form-signin-heading">Edit</h2>
+
+        <input type="email" name="email" class="form-control" placeholder="Email address" autofocus="" value="<%= currentUser.email %>">
+
+        <input type="password" name="password" class="form-control" placeholder="Password" >
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+    </form>
+</div>

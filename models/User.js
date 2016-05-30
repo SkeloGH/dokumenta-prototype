@@ -62,16 +62,14 @@ module.exports = Class('User').inherits(Krypton.Model)({
         next();
       });
 
-      if (CONFIG.environment !== 'test') {
-        // Send activation email after create a record only if the environment is not "test"
-        this.on('afterCreate', function(next) {
-          mailer.sendActivationLink(model)
-            .then(function () {
-              next();
-            })
-            .catch(next);
-        });
-      }
+      // Send activation email after create a record only if the environment is not "test"
+      this.on('afterCreate', function(next) {
+        mailer.sendActivationLink(model)
+          .then(function () {
+            next();
+          })
+          .catch(next);
+      });
 
       return this;
     },

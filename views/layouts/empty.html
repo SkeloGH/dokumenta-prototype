@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Documenta</title>
+    <meta content="<%= csrfToken %>" name="csrf-token" />
+    <script src="/dist/bundle.js"></script>
+</head>
+
+<body>
+    <% Object.keys(flash).forEach(function(key) { %>
+        <div class="alert alert-<%= key %>" role="alert"><%= flash[key] %></div>
+    <% })%>
+
+    <%= yield %>
+</body>
+
+</html>

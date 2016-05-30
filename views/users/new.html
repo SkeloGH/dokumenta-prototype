@@ -1,1 +1,31 @@
-New
+<div class="container">
+    <form class="signup form-signin" method="post" action="<%= routeMappings.Users.create.url() %>">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <h2 class="form-signin-heading">Please sign up</h2>
+
+        <input type="email" name="email" class="form-control" placeholder="Email address" autofocus="">
+
+        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(window).load(function() {
+        $('.signup').keypress(
+            function(e){
+             if (e.which == '13') {
+                event.preventDefault();
+              }
+        });
+
+        var form = new SignupForm({
+            element : $('.signup'),
+            success : function(data) {
+                window.location = '/';
+            }
+        });
+    });
+</script>

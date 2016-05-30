@@ -1,23 +1,12 @@
 var HomeController = Class('HomeController').inherits(BaseController)({
-  beforeActions : [
-    {
-      before : ['_beforeIndex'],
-      actions : ['index']
-    }
-  ],
   prototype : {
-    _beforeIndex : function(req, res, next) {
-      logger.info('Before Index');
-      next();
-    },
-
     index : function(req, res, next) {
-      res.render('home/index.html', {layout : 'application', posts : ["1", "2", "3", "4", "5"]});
-    },
+      if (req.user) {
+        return res.redirect(CONFIG.router.mappings.Users.show.url(req.user.id));
+      }
 
-    noLayout : function(req, res) {
-      res.render('home/index.html', {layout : false, posts : ["1", "2", "3", "4", "5"]});
-    },
+      res.render('home/index.html');
+    }
   }
 });
 
