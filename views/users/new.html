@@ -1,20 +1,36 @@
-<div class="container">
-    <form class="signup form-signin" method="post" action="<%= routeMappings.Users.create.url() %>">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+<div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+    <div class="mdl-layout__content">
+        <form class="session-form mdl-layout--fixed-header mdl-shadow--2dp" method="post" action="<%= routeMappings.Users.create.url() %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-        <h2 class="form-signin-heading">Please sign up</h2>
+            <header class="session-header mdl-layout__header is-casting-shadow">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">Sing up</span>
+                </div>
+            </header>
 
-        <input type="email" name="email" class="form-control" placeholder="Email address" autofocus="">
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="email" name="email"/>
+                    <label class="mdl-textfield__label">Email</label>
+                </div>
 
-        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="Password" name="password"/>
+                    <label class="mdl-textfield__label">Password</label>
+                </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-    </form>
+                <div>
+                    <button class="btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Sign up</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script type="text/javascript">
     $(window).load(function() {
-        $('.signup').keypress(
+        $('.session-form').keypress(
             function(e){
              if (e.which == '13') {
                 event.preventDefault();
@@ -22,7 +38,7 @@
         });
 
         var form = new SignupForm({
-            element : $('.signup'),
+            element : $('.session-form'),
             success : function(data) {
                 window.location = '/';
             }

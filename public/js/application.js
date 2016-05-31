@@ -7,12 +7,11 @@ window.$ = jQuery;
 
 require('./vendor/Widget.js');
 
-require('bootstrap/dist/js/bootstrap.js');
+// require('bootstrap/dist/js/bootstrap.js');
+// require('bootstrap/dist/css/bootstrap.css');
 
-require('bootstrap/dist/css/bootstrap.css');
-
-require('./../css/style.css');
-
+require('./../css/style.less');
+require('../../node_modules/material-design-lite/material.min.js');
 
 // Widgets
 
