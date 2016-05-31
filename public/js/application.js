@@ -11,7 +11,7 @@ require('./vendor/Widget.js');
 // require('bootstrap/dist/css/bootstrap.css');
 
 require('./../css/style.less');
-require('../../node_modules/material-design-lite/material.min.js');
+require('material-design-lite/material.min.js');
 
 // Widgets
 require('./widgets/SignupForm.js');
