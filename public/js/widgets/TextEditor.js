@@ -1,6 +1,6 @@
 Class('TextEditor').inherits(Widget)({
   HTML :  '\
-    <div class="prosemirror-editor">\
+    <div class="prosemirror-editor py1">\
       <div class="content"></div>\
     </div>\
   ',

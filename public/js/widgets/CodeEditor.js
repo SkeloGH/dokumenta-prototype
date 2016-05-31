@@ -1,6 +1,6 @@
 Class('CodeEditor').inherits(Widget)({
   HTML : '\
-    <div class="codemirror-editor">\
+    <div class="codemirror-editor py1">\
       <textarea></textarea>\
     </div>\
   ',

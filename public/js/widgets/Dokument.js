@@ -9,7 +9,7 @@ Class('Dokument').inherits(Widget)({
         <label class="mdl-textfield__label">Title</label>\
       </div>\
       <div class="container"></div>\
-      <div class="relative">\
+      <div class="relative mt2">\
         <button id="reate-new-document-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">\
           <i class="material-icons">add</i>\
         </button>\
@@ -19,8 +19,8 @@ Class('Dokument').inherits(Widget)({
           <li class="mdl-menu__item" data-type="text">Add Text Block</li>\
         </ul>\
       </div>\
-      <div class="mt2">\
-        <button class="save-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Save</button>\
+      <div class="mt2 right-align">\
+        <button class="save-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Save document</button>\
       </div>\
     </div>\
   ',
