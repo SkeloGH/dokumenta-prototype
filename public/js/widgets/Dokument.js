@@ -127,6 +127,7 @@ Class('Dokument').inherits(Widget)({
 
     success: function(data) {
       console.log(data);
+      location.reload();
     },
 
     error : function(err) {
@@ -142,21 +143,6 @@ Class('Dokument').inherits(Widget)({
       this.buttons.map(function(index, el) {
         componentHandler.upgradeElement(el);
       });
-
-      // componentHandler.upgradeElement(this.input[0]);
-      // componentHandler.upgradeElement(this.button[0]);
-    },
-
-    // destroy: function() {
-    //   Widget.prototype.destroy.call(this);
-
-    //   this.element.off('submit', this._submitHandlerRef);
-    //   this._submitHandlerRef = null;
-
-    //   this.button.off('click', this._clickHandlerRef);
-    //   this._clickHandlerRef = null;
-
-    //   return null;
-    // }
+    }
   }
 });
