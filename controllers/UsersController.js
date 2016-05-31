@@ -1,4 +1,4 @@
-var UsersController = Class('UsersController').inherits(BaseController)({
+var UsersController = Class('UsersController').inherits(RestfulController)({
   beforeActions : [
     {
       before : function(req, res, next) {
