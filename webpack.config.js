@@ -38,7 +38,8 @@ module.exports = {
   resolve: {
    alias: {
       jquery: path.join(__dirname, "/public/js/vendor/jquery-2.0.3.js" ),
-      validate: path.join(__dirname, "/public/js/vendor/validate.js" )
+      validate: path.join(__dirname, "/public/js/vendor/validate.js" ),
+      // simplemde: "simplemde/dist/simplemde.min.js"
     }
   }
 };

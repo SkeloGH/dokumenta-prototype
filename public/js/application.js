@@ -14,53 +14,13 @@ require('./../css/style.less');
 require('../../node_modules/material-design-lite/material.min.js');
 
 // Widgets
+require('./widgets/SignupForm.js');
 
-Class('SignupForm').inherits(Widget)({
-  prototype : {
-    init : function(config) {
-      Widget.prototype.init.call(this, config);
+require('codemirror/lib/codemirror.css');
+require('codemirror/theme/railscasts.css');
+global.CodeMirror = require('codemirror/lib/codemirror.js');
+require('codemirror/mode/javascript/javascript.js');
 
-      this._setup();
-    },
+global.prosemirror = require("prosemirror")
 
-    _setup : function() {
-      var form = this;
-
-      this.element.find('.btn').bind('click', function(e) {
-        var email = form.element.find('input[type="email"]').val() || '';
-        var password = form.element.find('input[type="password"]').val() || '';
-
-        var data = {
-          email : email,
-          password : password,
-          _csrf : $('meta[name="csrf-token"]').attr('content')
-        }
-
-        $.ajax({
-          method : 'POST',
-          url : form.element.attr('action'),
-          data : data,
-          dataType : 'json',
-
-          success : form.success,
-
-          error : form.error
-        });
-
-        e.preventDefault();
-      })
-    },
-
-    success : function(data) {
-      console.log(data);
-    },
-
-    error : function(err) {
-      for (var key in err.responseJSON) {
-        if (err.responseJSON.hasOwnProperty(key)) {
-          alert(err.responseJSON[key]);
-        }
-      }
-    }
-  }
-})
+require('./widgets/Dokument.js')
