@@ -49,9 +49,11 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <a class="btn btn-success">New Document</a>
 
+                <ul>
                 <% currentUser.documents.forEach(function(document) { %>
-                    <%= document.title %>
+                    <li><%= document.title %></li>
                 <% }) %>
+            </ul>
 
             </div>
             <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main">

@@ -87,12 +87,10 @@ Class('Dokument').inherits(Widget)({
 
       $.ajax({
         method : 'POST',
-        url : window.location + '/documents',
+        url : '/Documents',
         data : data,
         dataType : 'json',
-
         success : doku.success,
-
         error : doku.error
       });
 
@@ -103,7 +101,7 @@ Class('Dokument').inherits(Widget)({
     },
 
     error : function(err) {
-      console.error(err);
+      console.error(err.responseJSON);
     }
   }
 })

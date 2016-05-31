@@ -1,9 +1,12 @@
 var Document = Class('Document').inherits(Krypton.Model)({
   tableName : 'Documents',
-  attributes : ['id', 'userId', 'blocks', 'createdAt', 'updatedAt'],
+  attributes : ['id', 'userId', 'title', 'blocks', 'createdAt', 'updatedAt'],
 
   validations : {
     userId : [
+      'required'
+    ],
+    title : [
       'required'
     ]
   }

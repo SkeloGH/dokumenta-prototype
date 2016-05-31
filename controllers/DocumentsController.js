@@ -27,9 +27,17 @@ var DocumentsController = Class('DocumentsController').inherits(RestfulControlle
     },
 
     create : function(req, res, next) {
-      var document = new Document(req.body);
 
-      document.userId = req.params.user_id;
+      var data = {};
+
+      data.title = req.body.title;
+      data.blocks = {
+        data : req.body.blocks
+      }
+
+      var document = new Document(data);
+
+      document.userId = req.user.id;
 
       document.save()
         .then(function() {
