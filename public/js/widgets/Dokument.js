@@ -3,16 +3,26 @@ require('./TextEditor.js');
 
 Class('Dokument').inherits(Widget)({
   HTML : '\
-    <form class="main-document">\
+    <div class="main-document">\
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\
         <input class="title mdl-textfield__input" type="text" name="title"/>\
         <label class="mdl-textfield__label">Title</label>\
       </div>\
       <div class="container"></div>\
-      <div class="mt2">\
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Save</button>\
+      <div class="relative">\
+        <button id="reate-new-document-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">\
+          <i class="material-icons">add</i>\
+        </button>\
+        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" \
+          data-mdl-for="reate-new-document-btn">\
+          <li class="mdl-menu__item" data-type="code">Add Code Block</li>\
+          <li class="mdl-menu__item" data-type="text">Add Text Block</li>\
+        </ul>\
       </div>\
-    </form>\
+      <div class="mt2">\
+        <button class="save-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Save</button>\
+      </div>\
+    </div>\
   ',
 
   prototype : {
@@ -23,22 +33,27 @@ Class('Dokument').inherits(Widget)({
       Widget.prototype.init.call(this, config);
 
       this.blocks = [];
+
       this.input = this.element.find('.mdl-textfield');
-      this.button = this.element.find('.mdl-button');
+      this.buttons = this.element.find('.mdl-button');
+      this.list = this.element.find('.mdl-menu');
+      this.options = this.element.find('.mdl-menu__item');
+      this.saveButton = this.element.find('.save-button');
 
       this._bindEvents();
     },
 
     _bindEvents: function() {
-      this._submitHandlerRef = this._submitHandler.bind(this);
-      this.element.on('submit', this._submitHandlerRef);
+      this._optionClickHandlerRef = this._optionClickHandler.bind(this);
+      this.options.on('click', this._optionClickHandlerRef);
 
       this._clickHandlerRef = this._clickHandler.bind(this);
-      this.button.on('click', this._clickHandlerRef);
+      this.saveButton.on('click', this._clickHandlerRef);
     },
 
-    _submitHandler: function(ev) {
-      ev.preventDefault();
+    _optionClickHandler: function(ev) {
+      var type = ev.currentTarget.dataset.type;
+      this.addBlock(type);
     },
 
     _clickHandler: function() {
@@ -120,20 +135,28 @@ Class('Dokument').inherits(Widget)({
 
     render: function(element, parentElement) {
       Widget.prototype.render.call(this, element, parentElement);
+
       componentHandler.upgradeElement(this.input[0]);
-      componentHandler.upgradeElement(this.button[0]);
+      componentHandler.upgradeElement(this.list[0]);
+
+      this.buttons.map(function(index, el) {
+        componentHandler.upgradeElement(el);
+      });
+
+      // componentHandler.upgradeElement(this.input[0]);
+      // componentHandler.upgradeElement(this.button[0]);
     },
 
-    destroy: function() {
-      Widget.prototype.destroy.call(this);
+    // destroy: function() {
+    //   Widget.prototype.destroy.call(this);
 
-      this.element.off('submit', this._submitHandlerRef);
-      this._submitHandlerRef = null;
+    //   this.element.off('submit', this._submitHandlerRef);
+    //   this._submitHandlerRef = null;
 
-      this.button.off('click', this._clickHandlerRef);
-      this._clickHandlerRef = null;
+    //   this.button.off('click', this._clickHandlerRef);
+    //   this._clickHandlerRef = null;
 
-      return null;
-    }
+    //   return null;
+    // }
   }
 });

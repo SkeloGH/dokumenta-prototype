@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Dokumenta</title>
     <meta content="<%= csrfToken %>" name="csrf-token" />
@@ -10,82 +9,83 @@
     <!-- webpack -d -->
     <script src="/dist/bundle.js"></script>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-100">
-        <header class="demo-header mdl-layout__header is-casting-shadow">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">Dokumenta</span>
-                <div class="mdl-layout-spacer"></div>
+      <header class="demo-header mdl-layout__header is-casting-shadow">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Dokumenta</span>
+          <div class="mdl-layout-spacer"></div>
 
-                <button id="demo-menu-lower-right"
-                        class="mdl-button mdl-js-button mdl-button--icon">
-                    <i class="material-icons">more_vert</i>
-                </button>
-                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                    for="demo-menu-lower-right">
-                    <% if (isAuthenticated) { %>
-                    <li class="mdl-menu__item">
-                        <form class="navbar-form navbar-right" method="post" action="<%= routeMappings.logout.url() %>">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            Logout
-                            <button type="submit" class="btn btn-danger">Logout</button>
-                        </form>
-                    </li>
-                    <% } %>
-                </ul>
-            </div>
-        </header>
-
-        <div>
-
-            <div class="yield container-fluid">
-                <% Object.keys(flash).forEach(function(key) { %>
-                <nav class="row alert alert-<%= key %>" role="alert"><%= flash[key] %></nav>
-                <% })%>
-                <div class="row">
-                    <div class="col-sm-3 col-md-2 sidebar">
-                        <% currentUser.documents.forEach(function(document) { %>
-                        <section class="mb1 mdl-shadow--2dp mdl-color--white mdl-color-text--grey-600">
-                            <div class="p2">
-                                <%= document.title %>
-                            </div>
-                        </section>
-                        <% }) %>
-                    </div>
-                    <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main">
-                        <div class="document">
-                            <!-- <%= yield %> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+          <button id="demo-menu-lower-right"
+                  class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+              for="demo-menu-lower-right">
+            <% if (isAuthenticated) { %>
+            <li class="mdl-menu__item">
+              <form class="navbar-form navbar-right" method="post" action="<%= routeMappings.logout.url() %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                Logout
+                <button type="submit" class="btn btn-danger">Logout</button>
+              </form>
+            </li>
+            <% } %>
+          </ul>
         </div>
+      </header>
 
+      <div class="mdl-layout__content">
+        <div class="user-doku-list">
 
-        <div class="create-new-document-widget">
+          <div class="create-new-document-widget">
             <button id="create-new-document-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                <i class="material-icons">add</i>
+              <i class="material-icons">add</i>
             </button>
-            <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
-                data-mdl-for="create-new-document-btn">
-                <li class="mdl-menu__item" data-type='code'>Add Code Block</li>
-                <li class="mdl-menu__item" data-type='text'>Add Text Block</li>
-            </ul>
+          </div>
+
+          <ul class="mdl-list">
+            <% currentUser.documents.forEach(function(document) { %>
+            <li class="mdl-list px2 mdl-color--white mdl-color-text--grey-600">
+              <%= document.title %>
+            </li>
+            <% }) %>
+          </ul>
         </div>
 
-        <footer class="hide">
-            <p><a href="http://github.com/sgarza/generator-neonode" target="_blank"><span>Neonode</span></a></p>
-        </footer>
+        <div class="doku-content py2 px4">
+
+        <!-- <div class="yield container-fluid"> -->
+          <% Object.keys(flash).forEach(function(key) { %>
+          <nav class="row alert alert-<%= key %>" role="alert"><%= flash[key] %></nav>
+          <% })%>
+
+          <!-- <div class="row"> -->
+            <!-- <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main"> -->
+              <div class="document">
+                <!-- <%= yield %> -->
+              </div>
+            <!-- </div> -->
+          <!-- </div> -->
+        </div>
+
+      </div>
+
+    </div>
+
+
+      <footer class="hide">
+        <p><a href="http://github.com/sgarza/generator-neonode" target="_blank"><span>Neonode</span></a></p>
+      </footer>
     </div>
 
     <script>
 window.bbb = new CreateNewDocumentButton({
-    element: $('.create-new-document-widget')
+  element: $('.create-new-document-widget')
 });
     </script>
-</body>
+  </body>
 
 </html>
