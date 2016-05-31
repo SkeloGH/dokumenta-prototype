@@ -24,3 +24,4 @@ require('codemirror/mode/javascript/javascript.js');
 global.prosemirror = require("prosemirror")
 
 require('./widgets/Dokument.js')
+require('./widgets/CreateNewDocumentButton')

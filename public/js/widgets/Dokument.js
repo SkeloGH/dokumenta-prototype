@@ -3,18 +3,16 @@ require('./TextEditor.js');
 
 Class('Dokument').inherits(Widget)({
   HTML : '\
-    <div class="main-document">\
-    <input type="text" class="title">Title</input>\
-    <div class="container">\
-    </div>\
-      <div class="add-document">\
-        <div class="add-popover">\
-          <div class="popover-item">Add Markdown Block</div>\
-          <div class="popover-item">Add Code Block</div>\
-          <div class="popover-item">Add Text Block</div>\
-        </div>\
+    <form class="main-document">\
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\
+        <input class="title mdl-textfield__input" type="text" name="title"/>\
+        <label class="mdl-textfield__label">Title</label>\
       </div>\
-    </div>\
+      <div class="container"></div>\
+      <div class="mt2">\
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Save</button>\
+      </div>\
+    </form>\
   ',
 
   prototype : {
@@ -23,11 +21,28 @@ Class('Dokument').inherits(Widget)({
 
     init : function(config) {
       Widget.prototype.init.call(this, config);
-      var doku = this;
 
       this.blocks = [];
+      this.input = this.element.find('.mdl-textfield');
+      this.button = this.element.find('.mdl-button');
 
-      return this;
+      this._bindEvents();
+    },
+
+    _bindEvents: function() {
+      this._submitHandlerRef = this._submitHandler.bind(this);
+      this.element.on('submit', this._submitHandlerRef);
+
+      this._clickHandlerRef = this._clickHandler.bind(this);
+      this.button.on('click', this._clickHandlerRef);
+    },
+
+    _submitHandler: function(ev) {
+      ev.preventDefault();
+    },
+
+    _clickHandler: function() {
+      this.save();
     },
 
     addBlock : function(type) {
@@ -48,7 +63,6 @@ Class('Dokument').inherits(Widget)({
 
 
           editor.render(this.element.find('.container'));
-        default:
           break;
       }
 
@@ -74,7 +88,7 @@ Class('Dokument').inherits(Widget)({
         var block = {
           type : editor.type,
           content : editor.content()
-        }
+        };
 
         doku.blocks.push(block);
       });
@@ -83,7 +97,7 @@ Class('Dokument').inherits(Widget)({
         title : this.getTitle(),
         blocks : this.blocks,
         _csrf : $('meta[name="csrf-token"]').attr('content')
-      }
+      };
 
       $.ajax({
         method : 'POST',
@@ -102,6 +116,24 @@ Class('Dokument').inherits(Widget)({
 
     error : function(err) {
       console.error(err.responseJSON);
+    },
+
+    render: function(element, parentElement) {
+      Widget.prototype.render.call(this, element, parentElement);
+      componentHandler.upgradeElement(this.input[0]);
+      componentHandler.upgradeElement(this.button[0]);
+    },
+
+    destroy: function() {
+      Widget.prototype.destroy.call(this);
+
+      this.element.off('submit', this._submitHandlerRef);
+      this._submitHandlerRef = null;
+
+      this.button.off('click', this._clickHandlerRef);
+      this._clickHandlerRef = null;
+
+      return null;
     }
   }
-})
+});
