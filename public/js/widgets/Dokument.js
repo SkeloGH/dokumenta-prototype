@@ -63,6 +63,10 @@ Class('Dokument').inherits(Widget)({
       return this;
     },
 
+    getTitle : function() {
+      return this.element.find('input.title').val();
+    },
+
     save : function() {
       var doku = this;
 
@@ -75,8 +79,31 @@ Class('Dokument').inherits(Widget)({
         doku.blocks.push(block);
       });
 
-      console.log(this.blocks)
+      var data = {
+        title : this.getTitle(),
+        blocks : this.blocks,
+        _csrf : $('meta[name="csrf-token"]').attr('content')
+      }
 
+      $.ajax({
+        method : 'POST',
+        url : window.location + '/documents',
+        data : data,
+        dataType : 'json',
+
+        success : doku.success,
+
+        error : doku.error
+      });
+
+    },
+
+    success: function(data) {
+      console.log(data);
+    },
+
+    error : function(err) {
+      console.error(err);
     }
   }
 })
