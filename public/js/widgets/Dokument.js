@@ -1,9 +1,10 @@
-require('./CodeEditor.js')
+require('./CodeEditor.js');
+require('./TextEditor.js');
 
 Class('Dokument').inherits(Widget)({
   HTML : '\
     <div class="main-document">\
-    <div class="title"></div>\
+    <input type="text" class="title">Title</input>\
     <div class="container">\
     </div>\
       <div class="add-document">\
@@ -26,12 +27,6 @@ Class('Dokument').inherits(Widget)({
 
       this.blocks = [];
 
-      var titleEditor = new prosemirror.ProseMirror({
-        place: doku.element.find('.title')[0],
-        doc: "Set a title",
-        docFormat: "html"
-      });
-
       return this;
     },
 
@@ -40,21 +35,47 @@ Class('Dokument').inherits(Widget)({
 
       switch (type) {
         case 'code':
-          editor = new CodeEditor();
+          editor = new CodeEditor({
+            name : 'editor_' + this.children.length
+          });
+
           editor.render(this.element.find('.container'));
           break;
         case 'text':
-          editor = new prosemirror.ProseMirror({
-            place: this.element.find('.content'),
-            doc: 'Edit...',
-            docFormat : 'html'
+          editor = new TextEditor({
+            name : 'editor_' + this.children.length
           });
+
+
+          editor.render(this.element.find('.container'));
         default:
           break;
       }
+
+      this.appendChild(editor);
+
+      return this;
     },
 
     removeBlock : function(index) {
+      this['editor_' + index].destroy();
+
+      return this;
+    },
+
+    save : function() {
+      var doku = this;
+
+      this.children.forEach(function(editor) {
+        var block = {
+          type : editor.type,
+          content : editor.content()
+        }
+
+        doku.blocks.push(block);
+      });
+
+      console.log(this.blocks)
 
     }
   }
