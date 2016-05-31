@@ -51,12 +51,18 @@ body {
   padding-left: 16px;
 }
 
-.user-doku-list {
-  position: relative;
+.doku-list-wrapper {
+  position: fixed;
   width: 200px;
   height: e('calc(100vh - 56px)');
-  float: left;
   background: white;
+}
+
+.doku-list {
+  overflow: auto;
+  height: 100%;
+  margin-top: 0;
+  padding: 0;
 }
 
 .doku-content {

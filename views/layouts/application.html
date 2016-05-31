@@ -38,7 +38,7 @@
       </header>
 
       <div class="mdl-layout__content">
-        <div class="user-doku-list">
+        <div class="doku-list-wrapper">
 
           <div class="create-new-document-widget">
             <button id="create-new-document-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
@@ -46,7 +46,7 @@
             </button>
           </div>
 
-          <ul class="mdl-list">
+          <ul class="mdl-list doku-list">
             <% currentUser.documents.forEach(function(document) { %>
             <li class="mdl-list px2 mdl-color--white mdl-color-text--grey-600">
               <%= document.title %>
@@ -57,28 +57,17 @@
 
         <div class="doku-content py2 px4">
 
-        <!-- <div class="yield container-fluid"> -->
           <% Object.keys(flash).forEach(function(key) { %>
           <nav class="row alert alert-<%= key %>" role="alert"><%= flash[key] %></nav>
           <% })%>
 
-          <!-- <div class="row"> -->
-            <!-- <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main"> -->
-              <div class="document">
-                <!-- <%= yield %> -->
-              </div>
-            <!-- </div> -->
-          <!-- </div> -->
+          <div class="document">
+            <!-- <%= yield %> -->
+          </div>
         </div>
 
       </div>
 
-    </div>
-
-
-      <footer class="hide">
-        <p><a href="http://github.com/sgarza/generator-neonode" target="_blank"><span>Neonode</span></a></p>
-      </footer>
     </div>
 
     <script>
