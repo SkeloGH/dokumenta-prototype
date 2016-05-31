@@ -5,7 +5,7 @@ var HomeController = Class('HomeController').inherits(BaseController)({
         return res.redirect(CONFIG.router.mappings.Users.show.url(req.user.id));
       }
 
-      res.render('home/index.html');
+      res.redirect('/login');
     }
   }
 });
