@@ -2,7 +2,7 @@ var UsersController = Class('UsersController').inherits(RestfulController)({
   beforeActions : [
     {
       before : function(req, res, next) {
-        User.query().where('id', req.params.id)
+        User.query().include('documents').where('id', req.params.id)
           .then(function(result) {
             if (result.length === 0) {
               return next(new NotFoundError('User not found'));
