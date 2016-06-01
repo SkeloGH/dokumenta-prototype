@@ -18,18 +18,17 @@
           <span class="mdl-layout-title">Dokumenta</span>
           <div class="mdl-layout-spacer"></div>
 
-          <button id="demo-menu-lower-right"
-                  class="mdl-button mdl-js-button mdl-button--icon">
+          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
             <i class="material-icons">more_vert</i>
           </button>
+
           <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
               for="demo-menu-lower-right">
             <% if (isAuthenticated) { %>
             <li class="mdl-menu__item">
               <form class="navbar-form navbar-right" method="post" action="<%= routeMappings.logout.url() %>">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                Logout
-                <button type="submit" class="btn btn-danger">Logout</button>
+                <button type="submit" class="logout-button">Logout</button>
               </form>
             </li>
             <% } %>
@@ -71,9 +70,14 @@
     </div>
 
     <script>
-window.bbb = new CreateNewDocumentButton({
-  element: $('.create-new-document-widget')
-});
+      new CreateNewDocumentButton({
+        element: $('.create-new-document-widget')
+      });
+
+      var form = $('.demo-header form');
+      $('.demo-header .mdl-menu__item').on('click', function() {
+        form.submit();
+      });
     </script>
   </body>
 
